@@ -8,6 +8,8 @@
     <div class="col-sm-8">
     <h1>Search restaurants</h1>
         <div class="container">
+        {{$name }}
+            
 
         <form action="/search" method="POST" role="search">
             {{ csrf_field() }}

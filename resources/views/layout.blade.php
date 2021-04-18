@@ -61,36 +61,36 @@
                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     </li>
                 @endif
-            @else
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="../cart">Cart <i class="fa fa-shopping-cart"></i></a>
-                </li>
-            </ul>   
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }} <span class="caret"></span>
-                    </a>
-
-
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        @if(Auth::check())
-                    	<a class="dropdown-item" href="/users/{{$user->id}}">
-                        {{-- <a class="dropdown-item" href="{{ route('users', [$user->id]) }}"></a> --}}
-                        Profile</a>
-                        @endif
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
+                @else
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../cart">Cart <i class="fa fa-shopping-cart"></i></a>
+                    </li>
+                </ul>   
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
-            @endguest
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            @if(Auth::check())
+                        	<a class="dropdown-item" href="/users/{{$user->id}}">
+                            {{-- <a class="dropdown-item" href="{{ route('users', [$user->id]) }}"></a> --}}
+                            Profile</a>
+                            @endif
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @endguest
             </ul>
             
             <form action="/search" method="POST" role="search">
@@ -113,7 +113,7 @@
     <main class="py-4">
         <div class="container">
         @if(session()->has('notif'))
-            <div class="alert alert success">
+            <div class="alert alert success" style="background-color: #ddd;">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <strong>Notification: </strong>{{session()->get('notif')}}
             </div>

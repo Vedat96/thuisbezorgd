@@ -36,7 +36,7 @@
                     {{-- <h2>{{$consumable->category}}</h2> --}}
                     <h4><a href="{{ route('consumables.show', ['restaurant_id' => $restaurant->id, 'consumable' => $consumable->id]) }}">{{$consumable->name}} </a></h4>
                     <p class="text-danger">€{{$consumable->price}} </p>
-                    <p><a class="btn btn-primary" style="padding: 10px;" href="{{route('consumable.AddToCart', ['id' => $consumable->id])}}" role="button">Add to cart</a></p>
+                    <p><a class="btn btn-primary" style="padding: 10px;" href="{{route('cartProduct.AddToCart', ['id' => $consumable->id])}}" role="button">Add to cart</a></p>
                 </div>
                 @endforeach
             </div>

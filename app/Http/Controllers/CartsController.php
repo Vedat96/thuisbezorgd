@@ -30,88 +30,59 @@ class CartsController extends Controller
             // $oldCart = Session::get('cart');
             // $cart = (new Cart($oldCart))->get();
             $cart = Session::get('cart');
+            $consumable = Consumable::find($id);
+            $totalPrice = $cart->items;
+            // $x = "alex";
+
+
             return view('cart')->with(['consumables' => $cart->items, 'cart->items' => $cart->items, 'totalQty' => $cart->totalQty, 'totalPrice' => $cart->totalPrice]);
     }
-    
-
-
  
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function update (Request $request, $id)
     {
-        //
-    }
+        $consumable = Consumable::find($id);
+        $cart = Session::has('cart') ? Session::get('cart') : [];
 
- 
+        if(!$cart){
+            $cart = new Cart($cart);
+        }
+        $cart->add($consumable, $consumable->id);
+        Session::put('cart',$cart);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        session()->flash('notif', 'Your consumable is added succesfully');
+        // dd($request->session()->get('cart'));
+        // dd(session()->all()); 
+        return redirect()->back();
+   }
 
- 
+   public function remove (Request $request, $id)
+   {
+        $consumable = Consumable::find($id);
+        $cart = Session::has('cart') ? Session::get('cart') : [];
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request, $id)
-    {
-        $value = $request->session()->get('cart');
-        return view('cart');
-    }
+        $cart->remove($consumable, $consumable->id);
+        Session::put('cart',$cart);
 
- 
+        // if($cart->qty <= 0){
+        //     unset($cart->items[$id]);
+        //     // unset($cart['id']);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        // }
 
- 
+        session()->flash('notif', 'Your consumable is removed succesfully');
+        return redirect()->back();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+   }
+    public function totalPrice(Request $request, $id)
+   {
+        $cart = Session::has('cart') ? Session::get('cart') : [];
 
- 
+        $totalPrice = 0;
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+   }
+
+   public function reset(Request $request, $id){
+        
+   }
 }

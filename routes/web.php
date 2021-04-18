@@ -41,15 +41,25 @@ Route::resource('restaurants/{restaurant_id}/consumables', 'ConsumablesControlle
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', ['totalPrice' => 'Samantha']);
 });
 
 
 Route::group(['middleware' => 'auth'], function() {
 	
 Route::get('/cart', 'CartsController@index')->name('cart');
+Route::get('/add/{id}', 'CartsController@update')->name('cartProduct.AddToCart');
+Route::get('/remove/{id}', 'CartsController@remove')->name('cartProduct.removeFromCart');
+// Route::get('/totalPrice', 'CartsController@totalPrice')->name('totalPrice');
 
-Route::get('/add/{id}', 'AddConsumableController@update')->name('consumable.AddToCart');
+Route::get('/', function () {
+    return view('welcome', ['name' => 'Samantha']);
+});
+
+
+// Route::get('/add/{id}', 'AddConsumableController@update')->name('consumable.AddToCart');
+// Route::get('/remove/{id}', 'AddConsumableController@remove')->name('consumable.RemoveFromCart');
+
 Route::resource('cart', 'CartsController');
 Route::resource('order', 'OrdersController');
 

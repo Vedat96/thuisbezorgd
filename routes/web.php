@@ -40,11 +40,6 @@ Route::resource('restaurants/{restaurant_id}/consumables', 'ConsumablesControlle
 
 
 
-Route::get('/', function () {
-    return view('welcome', ['totalPrice' => 'Samantha']);
-});
-
-
 Route::group(['middleware' => 'auth'], function() {
 	
 Route::get('/cart', 'CartsController@index')->name('cart');
